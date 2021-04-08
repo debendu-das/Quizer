@@ -1,10 +1,8 @@
 import React from 'react';
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, Button, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
+import Logo from '../../assets/Logo.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,14 +20,13 @@ const Appbar = () => {
 
   return (
       <header>
-        <AppBar position="static">
+        <AppBar position="fixed" color="transparent">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <i class="fas fa-question-circle"></i>
+            <IconButton edge="start" color="inherit" component={NavLink} to={'/'}>
+              <img width="30" height="30" src={Logo} align="center" alt="Quizer"/>Quizer
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Quizer
-            </Typography>
+            <Typography className={classes.title} />
+            <Button color="inherit" component={NavLink} to={'/about'}>About</Button>
           </Toolbar>
         </AppBar>
       </header>
