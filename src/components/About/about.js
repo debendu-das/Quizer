@@ -85,8 +85,6 @@ const About = () => {
                                     It is a quiz conducting webapp made by javaScript framework library React.
                                     It is completely free for all. I developed this webapp just for a project purpose,
                                     and i will improve this day by day.<br/><br/>
-                                    In the next update you will also could select the
-                                     question categories, difficulty levels, and lots of more features are comming soon..<br/><br/>
                                      If you like this webapp Thank you soo much! also you can give me feedback in
                                     my email address or in the social media links given below.<br/>
                                 </Typography>

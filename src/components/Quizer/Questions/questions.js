@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Typography, Divider, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Fade } from '@material-ui/core';
+import { Grid, Paper, Typography, Divider, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Fade, Snackbar } from '@material-ui/core';
 import { NavigateNext, NavigateBefore, PublishTwoTone } from '@material-ui/icons';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -17,16 +18,40 @@ const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(1, 2, 0, 0)
     },
+    snackbar: {
+        marginTop: theme.spacing(2)
+    }
   }));
 
 const Questions = ({qnum, questions, handleSubmit, onChangeHandler, onSubmitHandler, nextQUestion, prevQUestion }) => {
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
+    const [copy, setCopy] = useState(false);
     useEffect(() => {
         setLoading(false);
     }, []);
+
+    const handleClose = () => {
+        setCopy(false);
+      };
+
+    const copyAleartHandlder = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setCopy(true);
+      };
     return (
         <Grid item xs={12} >
+
+            {
+
+                copy ? 
+                <Snackbar className={classes.snackbar} open={copy} autoHideDuration={60000} onClose={handleClose} anchorOrigin={{ vertical : 'top', horizontal: 'center' }}>
+                    <Alert severity="error" align="center" onClose={handleClose}>Why Are You Coping! LOL... <br/>Please don't google for the Answer!!!</Alert>
+                </Snackbar>
+                : null
+            }
             <Fade in={!loading}>
             <Paper className={classes.paper} elevation={3} >
                 <Grid container justify="center" alignItems="center" spacing={2}>
@@ -39,7 +64,7 @@ const Questions = ({qnum, questions, handleSubmit, onChangeHandler, onSubmitHand
                     </Grid>
                     
                     <Grid item xs={12}>
-                        <Typography variant="h6" dangerouslySetInnerHTML={{__html: questions[qnum].question}}></Typography>
+                        <Typography onCopy={copyAleartHandlder} variant="h6" dangerouslySetInnerHTML={{__html: questions[qnum].question}}></Typography>
                         <Divider className={classes.divider}/>
                         
                     </Grid>
